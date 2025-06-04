@@ -24,22 +24,28 @@ const payWithStripeCheckout = async ({
       throw new Error("Invalid input parameters");
     }
 
+    // Get server URL from environment variable or default to localhost:3000
+    const serverUrl =
+      import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
+
     // Create checkout session on your backend
-    const response = await fetch("/api/create-checkout-session", {
+    const response = await fetch(`${serverUrl}/api/create-checkout-session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        amount: amount * 100, // Convert to cents
+        amount: Math.round(amount * 100), // Convert to cents and ensure integer
         currency: "usd",
         customer_email: email,
         customer_name: `${firstName} ${lastName}`,
+        product_name: "Order from Your Store",
       }),
     });
 
     if (!response.ok) {
-      throw new Error("Failed to create checkout session");
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || "Failed to create checkout session");
     }
 
     const { sessionId } = await response.json();
@@ -52,6 +58,9 @@ const payWithStripeCheckout = async ({
     if (error) {
       throw new Error(error.message);
     }
+
+    // Note: onSuccess won't be called here because of the redirect
+    // It will be handled by your success page after redirect
   } catch (error) {
     console.error("Error creating checkout session:", error);
     if (onError) onError(error.message);

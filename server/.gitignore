@@ -6,5 +6,5 @@ dist
 out
 build
 coverage
+
 vercel.json
-.vercel

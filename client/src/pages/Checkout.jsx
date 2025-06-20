@@ -40,7 +40,7 @@ const Checkout = () => {
       (sum, item) => sum + item.price * item.quantity,
       0,
     );
-    const shipping = subtotal > 1000 ? 0 : 9.99;
+    const shipping = subtotal > 100 ? 0 : 9.99;
     const tax = subtotal * 0.08;
     const total = subtotal + shipping + tax;
     return { subtotal, shipping, tax, total };

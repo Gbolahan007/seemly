@@ -51,3 +51,20 @@ export async function getRelatedProducts(category, excludeId) {
 
   return data;
 }
+
+export const fetchProductsBySearch = async (search) => {
+  let query = supabase.from("products").select("*");
+
+  if (search) {
+    query = query.ilike("name", `%${search}%`);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error(error);
+    throw new Error("Related products could not be loaded");
+  }
+
+  return data;
+};

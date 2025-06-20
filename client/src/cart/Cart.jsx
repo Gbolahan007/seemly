@@ -125,7 +125,7 @@ function Cart() {
               if (isAuthenticated) {
                 navigate("/checkout");
               } else {
-                navigate("/signup");
+                navigate("/signin");
               }
               setShowModal(false);
             }}

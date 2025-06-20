@@ -12,7 +12,7 @@ function Login() {
       signOut();
       navigate("/home");
     } else {
-      navigate("/signup");
+      navigate("/signin");
     }
   };
 

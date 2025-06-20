@@ -5,7 +5,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./AppLayout";
 import UpdatePassword from "./authentication/UpdatePassword";
 import { AppProvider } from "./contexts/AuthContext";
-
 import { ModalProvider } from "./contexts/ModalProvider";
 import PageNotFound from "./PageNotFound";
 import About from "./pages/About";
@@ -39,19 +38,20 @@ function App() {
             <ScrollToTop />
             <Routes>
               <Route element={<AppLayout />}>
-                <Route index element={<Navigate replace to="/home" />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/products" element={<Products />} />
+                <Route index element={<Navigate replace to="home" />} />
+                <Route path="home" element={<Home />} />
+                <Route path="products" element={<Products />} />
+                <Route path="about" element={<About />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="signin" element={<SignInSignUp />} />
                 <Route
-                  path="/product/:category/:slug"
+                  path="/products/:category/:slug"
                   element={<ProductDisplay />}
                 />
 
                 {/* ✅ Protected routes */}
                 <Route
-                  path="/checkout"
+                  path="checkout"
                   element={
                     <ProtectedRoute>
                       <Checkout />
@@ -59,53 +59,24 @@ function App() {
                   }
                 />
                 <Route
-                  path="/success"
+                  path="updatepassword"
                   element={
                     <ProtectedRoute>
-                      <SuccessPage />
+                      <UpdatePassword />
                     </ProtectedRoute>
                   }
                 />
 
-                <Route path="/cancel" element={<CancelCheckout />} />
+                <Route path="success" element={<SuccessPage />} />
+                <Route path="cancel" element={<CancelCheckout />} />
+                <Route path="auth/callback" element={<AuthCallback />} />
               </Route>
-
-              <Route path="/signup" element={<SignInSignUp />} />
-              <Route path="/auth/callback" element={<AuthCallback />} />
-              <Route path="/update-password" element={<UpdatePassword />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>
+          <Toaster />
         </ModalProvider>
       </AppProvider>
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerStyle={{ margin: "8px" }}
-        toastOptions={{
-          success: {
-            duration: 3000,
-            style: {
-              background: "#4CAF50",
-              color: "#FFFFFF",
-            },
-          },
-          error: {
-            duration: 5000,
-            style: {
-              background: "#D32F2F",
-              color: "#FFFFFF",
-            },
-          },
-          style: {
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px",
-            background: "#222222",
-            color: "#E0E0E0",
-          },
-        }}
-      />
     </QueryClientProvider>
   );
 }

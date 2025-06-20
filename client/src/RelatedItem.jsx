@@ -14,7 +14,7 @@ function RelatedItem({ relatedItems }) {
 
   return (
     <div
-      onClick={() => navigate(`/product/${category}/${slug}`)}
+      onClick={() => navigate(`/products/${category}/${slug}`)}
       className="group relative flex h-[300px] w-full max-w-[200px] cursor-pointer flex-col overflow-hidden rounded-xl bg-white transition-all duration-300 hover:shadow-lg sm:h-[350px] sm:max-w-[260px] sm:p-0 md:h-[400px] md:max-w-[300px]"
     >
       {/* Image Container */}

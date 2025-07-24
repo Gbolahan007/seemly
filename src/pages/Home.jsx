@@ -5,7 +5,7 @@ import UnderConstructionModal from "../UnderConstructionModal"; // Import the mo
 
 const HeroSection = lazy(() => import("../HeroSection"));
 const BrandDescription = lazy(() => import("../BrandDescription"));
-const FeaturedCategory = lazy(() => import("../FeaturedCategory"));
+// const FeaturedCategory = lazy(() => import("../FeaturedCategory"));
 const BestSeller = lazy(() => import("../BestSeller"));
 const FeatureCards = lazy(() => import("../FeatureCards"));
 const ProductReviews = lazy(() => import("../ProductReviews"));

@@ -95,31 +95,19 @@ function Footer() {
                 className="text-gray-300 transition hover:text-green-400"
               />
             </a>
-            <a
-              href="https://twitter.com/yourprofile"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="#" target="_blank" rel="noopener noreferrer">
               <FiTwitter
                 size={22}
                 className="text-gray-300 transition hover:text-green-400"
               />
             </a>
-            <a
-              href="https://wa.me/yourphonenumber"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="#" target="_blank" rel="noopener noreferrer">
               <BsWhatsapp
                 size={22}
                 className="text-gray-300 transition hover:text-green-400"
               />
             </a>
-            <a
-              href="https://facebook.com/yourprofile"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="#" target="_blank" rel="noopener noreferrer">
               <BsFacebook
                 size={22}
                 className="text-gray-300 transition hover:text-green-400"

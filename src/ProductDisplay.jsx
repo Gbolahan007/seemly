@@ -18,6 +18,7 @@ import Loader from "./Loader";
 import { useProduct } from "./pages/useProduct";
 import { useRelatedProducts } from "./pages/useRelatedProduct";
 import RelatedItem from "./RelatedItem";
+import { useUser } from "./authentication/useUser";
 
 // Move formatter outside component to prevent recreation on each render
 const formatCurrency = (price) => {
@@ -81,6 +82,8 @@ function ProductDisplay() {
   const { setShowModal } = useModal();
   const [activeTab, setActiveTab] = useState("details");
   const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
+  const cart = useSelector((state) => state.cart.cart);
 
   // Load related products only when product is loaded and has category
   const { isLoadingRelatedProduct, relatedProducts } = useRelatedProducts(
@@ -108,7 +111,7 @@ function ProductDisplay() {
       }
     };
   }, [dispatch, product, setShowModal]);
-
+    
   const handleIncreaseQuantity = useMemo(() => {
     return () => product && dispatch(increaseItemQuantity(product));
   }, [dispatch, product]);
@@ -190,13 +193,21 @@ function ProductDisplay() {
 
             {/* Buy and Add to Cart Buttons */}
             <div className="mt-auto flex flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
-              <button
-                onClick={() => navigate("/checkout")}
-                className="w-full rounded-lg bg-black px-6 py-3 text-center font-medium text-white shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 sm:w-auto sm:flex-1"
-                aria-label="Buy Now"
-              >
-                Buy Now
-              </button>
+              {cart.length >= 1 && (
+                <button
+                  onClick={() => {
+                    if (isAuthenticated) {
+                      navigate("/checkout");
+                    } else {
+                      navigate("/signin");
+                    }
+                  }}
+                  className="w-full rounded-lg bg-black px-6 py-3 text-center font-medium text-white shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 sm:w-auto sm:flex-1"
+                  aria-label="Buy Now"
+                >
+                  Buy Now
+                </button>
+              )}
               <button
                 onClick={handleAddToCart}
                 className="w-full rounded-lg border border-gray-300 bg-white px-6 py-3 text-center font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:w-auto sm:flex-1"

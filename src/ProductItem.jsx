@@ -9,7 +9,6 @@ function formatCurrency(price) {
   }).format(price);
 }
 
-// Individual product component with slide-in animation when in view
 function ProductItem({ product, index }) {
   const navigate = useNavigate();
   const ref = useRef(null);
@@ -23,7 +22,7 @@ function ProductItem({ product, index }) {
   return (
     <motion.div
       ref={ref}
-      onClick={() => navigate(`/product/${product.category}/${product.slug}`)}
+      onClick={() => navigate(`/products/${product.category}/${product.slug}`)}
       className="cursor-pointer rounded-lg border p-4 shadow-md"
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
@@ -40,7 +39,7 @@ function ProductItem({ product, index }) {
         className="mb-3 h-64 w-full rounded-md object-cover"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = "/placeholder.jpg"; // Fallback image
+          e.target.src = "/placeholder.jpg";
         }}
         variants={{
           hidden: { opacity: 0, scale: 0.9 },
